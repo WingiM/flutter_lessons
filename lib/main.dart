@@ -14,6 +14,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        primarySwatch: Colors.amber,
         primaryColor: Colors.amber,
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.amber,

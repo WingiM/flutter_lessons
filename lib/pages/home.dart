@@ -14,6 +14,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int index = 0;
+  String title = "Список дел";
+
   final listPages = [
     const DealsPage(),
     const CalendarPage(),
@@ -25,6 +27,8 @@ class _HomePageState extends State<HomePage> {
     var primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: AppBar(
+        title: Text(title),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
@@ -49,6 +53,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      drawer: const Drawer(),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
           backgroundColor: primaryColor,
@@ -67,8 +72,10 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               index = value;
               if (index != 0) {
+                title = 'Календарь';
                 _showButton = false;
               } else {
+                title = "Список дел";
                 _showButton = true;
               }
             });
