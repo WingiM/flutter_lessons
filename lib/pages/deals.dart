@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
-class DealsPage extends StatelessWidget {
-  const DealsPage({super.key});
+class DealsPage extends StatefulWidget {
+  final String searchText;
+  const DealsPage(this.searchText, {super.key});
+
+  @override
+  State<DealsPage> createState() => _DealsPageState();
+}
+
+class _DealsPageState extends State<DealsPage> {
+  List<Deal> currentDeals = List.from(deals);
 
   Widget generateListTile(BuildContext context, int index) {
-    var deal = deals[index];
+    var deal = currentDeals[index];
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -28,9 +36,11 @@ class DealsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    currentDeals =
+        deals.where((x) => x.title.contains(widget.searchText)).toList();
     return ListView.builder(
       itemBuilder: (context, index) => generateListTile(context, index),
-      itemCount: deals.length,
+      itemCount: currentDeals.length,
     );
   }
 }

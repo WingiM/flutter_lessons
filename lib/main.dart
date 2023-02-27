@@ -15,23 +15,6 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.amber,
-        primaryColor: Colors.amber,
-        floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Colors.amber,
-        ),
-        appBarTheme: const AppBarTheme(
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-            actionsIconTheme: IconThemeData(
-              color: Colors.black,
-            )),
-        elevatedButtonTheme: const ElevatedButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: MaterialStatePropertyAll(Colors.black),
-          ),
-        ),
-        hintColor: Colors.lime,
       ),
       debugShowCheckedModeBanner: false,
       routes: {

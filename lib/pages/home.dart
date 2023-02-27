@@ -15,32 +15,69 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int index = 0;
   String title = "Список дел";
+  bool isDefaultAppBar = true;
+  String searchText = "";
 
-  final listPages = [
-    const DealsPage(),
-    const CalendarPage(),
-  ];
   bool _showButton = true;
+
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var primaryColor = Theme.of(context).primaryColor;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.popAndPushNamed(context, '/');
-            },
-            icon: const Icon(
-              Icons.exit_to_app,
-            ),
-          ),
-        ],
-        backgroundColor: primaryColor,
+
+    var defaultAppBar = AppBar(
+      actions: [
+        IconButton(
+          onPressed: () {
+            setState(() {
+              searchController.clear();
+              isDefaultAppBar = !isDefaultAppBar;
+            });
+          },
+          icon: const Icon(Icons.close),
+        )
+      ],
+      title: TextField(
+        controller: searchController,
+        onChanged: (value) {
+          setState(() {
+            searchText = value.toLowerCase();
+          });
+        },
+        decoration: const InputDecoration(label: Text('Название')),
       ),
+    );
+
+    var searchAppBar = AppBar(
+      title: Text(title),
+      centerTitle: true,
+      actions: [
+        IconButton(
+          onPressed: () {
+            setState(() {
+              isDefaultAppBar = !isDefaultAppBar;
+            });
+          },
+          icon: const Icon(
+            Icons.search,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.popAndPushNamed(context, '/');
+          },
+          icon: const Icon(Icons.exit_to_app),
+        ),
+      ],
+      backgroundColor: primaryColor,
+    );
+    final listPages = [
+      DealsPage(searchText),
+      const CalendarPage(),
+    ];
+    return Scaffold(
+      appBar: isDefaultAppBar ? searchAppBar : defaultAppBar,
       body: Container(
         child: listPages[index],
       ),
@@ -81,5 +118,11 @@ class _HomePageState extends State<HomePage> {
             });
           }),
     );
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 }
