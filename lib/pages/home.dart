@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lessons/pages/deals.dart';
+import 'package:flutter_lessons/pages/scroll.dart';
 
 import 'calendar.dart';
 
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
     final listPages = [
       DealsPage(searchText),
       const CalendarPage(),
+      const CardPage(),
     ];
 
     return listPages[index];
@@ -114,16 +116,25 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.calendar_month),
               label: 'Каледарь',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.card_membership_sharp),
+              label: 'Карточка',
+            ),
           ],
           onTap: (value) {
             setState(() {
               index = value;
-              if (index != 0) {
-                title = 'Календарь';
-                _showButton = false;
-              } else {
-                title = "Список дел";
-                _showButton = true;
+              _showButton = index == 0;
+              switch (index) {
+                case 0:
+                  title = "Список дел";
+                  break;
+                case 1:
+                  title = 'Календарь';
+                  break;
+                case 2:
+                  title = 'Карточка';
+                  break;
               }
             });
           }),
