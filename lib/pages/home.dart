@@ -22,11 +22,17 @@ class _HomePageState extends State<HomePage> {
 
   TextEditingController searchController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    var primaryColor = Theme.of(context).primaryColor;
+  Widget getCurrentPage(int index) {
+    final listPages = [
+      DealsPage(searchText),
+      const CalendarPage(),
+    ];
 
-    var defaultAppBar = AppBar(
+    return listPages[index];
+  }
+
+  AppBar getDefaultAppBar(BuildContext context) {
+    return AppBar(
       actions: [
         IconButton(
           onPressed: () {
@@ -48,8 +54,10 @@ class _HomePageState extends State<HomePage> {
         decoration: const InputDecoration(label: Text('Название')),
       ),
     );
+  }
 
-    var searchAppBar = AppBar(
+  AppBar getSearchAppBar(BuildContext context) {
+    return AppBar(
       title: Text(title),
       centerTitle: true,
       actions: [
@@ -70,16 +78,18 @@ class _HomePageState extends State<HomePage> {
           icon: const Icon(Icons.exit_to_app),
         ),
       ],
-      backgroundColor: primaryColor,
     );
-    final listPages = [
-      DealsPage(searchText),
-      const CalendarPage(),
-    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var primaryColor = Theme.of(context).primaryColor;
     return Scaffold(
-      appBar: isDefaultAppBar ? searchAppBar : defaultAppBar,
+      appBar: isDefaultAppBar
+          ? getSearchAppBar(context)
+          : getDefaultAppBar(context),
       body: Container(
-        child: listPages[index],
+        child: getCurrentPage(index),
       ),
       floatingActionButton: AnimatedOpacity(
         duration: const Duration(milliseconds: 300),

@@ -36,8 +36,9 @@ class _DealsPageState extends State<DealsPage> {
 
   @override
   Widget build(BuildContext context) {
-    currentDeals =
-        deals.where((x) => x.title.contains(widget.searchText)).toList();
+    currentDeals = deals
+        .where((x) => x.title.toLowerCase().contains(widget.searchText))
+        .toList();
     return ListView.builder(
       itemBuilder: (context, index) => generateListTile(context, index),
       itemCount: currentDeals.length,
