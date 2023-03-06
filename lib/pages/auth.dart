@@ -72,6 +72,18 @@ class AuthPage extends StatelessWidget {
                 ),
                 onTap: () => {},
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/iphone');
+                },
+                child: const Text('Go see Iphone page'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/iphone-grid');
+                },
+                child: const Text('Go see Iphone grid page'),
+              ),
             ],
           ),
         ),

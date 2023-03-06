@@ -33,7 +33,7 @@ class CardPage extends StatelessWidget {
             color: Colors.black,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.45,
             child: InfiniteListView.builder(itemBuilder: (context, index) {
               return Center(
                 child: SizedBox(
