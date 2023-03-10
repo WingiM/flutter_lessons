@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lessons/pages/deals.dart';
 import 'package:flutter_lessons/pages/scroll.dart';
 
+import '../components/menu_drawer.dart';
 import 'calendar.dart';
 
 class HomePage extends StatefulWidget {
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      drawer: const Drawer(),
+      drawer: const MenuDrawer(),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
           backgroundColor: primaryColor,
